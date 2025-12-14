@@ -2,9 +2,15 @@
 
 @section('title', 'the list of tasks')
 @section('content')
+    <nav class="mb-4">
+        <a href="{{ route('tasks.create') }}" class="link">Create
+            Task</a>
+    </nav>
+
     @forelse  ($tasks as $task)
         <div>
-            <a href="{{ route('tasks.show', ['task' => $task->id]) }}">{{ $task->title }}</a>
+            <a href="{{ route('tasks.show', ['task' => $task->id]) }}" @class(['font-bold', 'line-through' => $task->completed])>
+                {{ $task->title }}</a>
         </div>
     @empty
         <div>there aren't any tasks</div>
@@ -14,5 +20,5 @@
             {{ $tasks->links() }}
         @endif
     </nav>
-    <a href="{{ route('tasks.create') }}"><button>Create Task</button></a>
+
 @endsection
